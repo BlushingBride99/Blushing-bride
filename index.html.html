@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blushing Bride — Wedding Photography & Cinematography</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --bg: #0A1615;
+    --bg-deep: #060D0C;
+    --panel: #10201E;
+    --line: #1E3532;
+    --ivory: #F3EEE3;
+    --ivory-dim: #A9BAB5;
+    --teal: #3E9188;
+    --amber: #E28A46;
+    --gold: #D8B15C;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg); color:var(--ivory);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sans{ font-family: Helvetica, Arial, sans-serif; }
+  a{ color:inherit; }
+  section{ padding: 0 8vw; }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 18px 8vw; background: rgba(10,22,21,0.88); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .brand{ font-size:15px; letter-spacing:0.14em; color:var(--ivory); font-weight:600; }
+  .brand span{ color:var(--amber); }
+  .nav-links{ display:flex; gap:26px; align-items:center; font-size:13px; }
+  .nav-links a{ text-decoration:none; color:var(--ivory-dim); transition:color .2s; }
+  .nav-links a:hover{ color:var(--amber); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 10px 18px; border-radius:30px; text-decoration:none;
+    font-size:13px; font-weight:600; letter-spacing:0.02em;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-wa{ background:#25D366; color:#06210F; }
+  .btn-wa:hover{ box-shadow:0 6px 20px rgba(37,211,102,0.35); }
+  .btn-outline{ border:1px solid var(--line); color:var(--ivory); }
+  .btn-outline:hover{ border-color:var(--amber); color:var(--amber); }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; overflow:hidden;
+    padding: 90px 8vw 80px;
+    background:
+      radial-gradient(ellipse at 12% -10%, rgba(62,145,136,0.28), transparent 55%),
+      radial-gradient(ellipse at 92% 0%, rgba(226,138,70,0.18), transparent 50%),
+      linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'Courier New', monospace; font-size:12px; letter-spacing:0.16em;
+    color: var(--teal); margin-bottom:20px; position:relative; z-index:1;
+  }
+  .hero h1{
+    font-size: clamp(34px, 5.6vw, 64px); font-weight:400; letter-spacing:-0.01em;
+    max-width: 17ch; line-height:1.14; position:relative; z-index:1;
+    animation: riseIn 900ms cubic-bezier(.2,.8,.2,1) both;
+  }
+  .hero h1 em{ font-style:italic; color:var(--teal); }
+  .hero p.lede{
+    font-family: Helvetica, Arial, sans-serif; font-size:16.5px; color:var(--ivory-dim);
+    max-width:48ch; margin-top:22px; position:relative; z-index:1;
+    animation: riseIn 900ms 120ms cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes riseIn{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  .hero-ctas{ display:flex; gap:14px; margin-top:38px; flex-wrap:wrap; position:relative; z-index:1; }
+  .hero-ctas .btn{ padding:14px 26px; font-size:14px; }
+
+  /* ===== PACKAGES ===== */
+  .packages{ padding: 80px 8vw 20px; }
+  .section-head{ margin-bottom:50px; }
+  .section-head .kicker{ font-family:'Courier New', monospace; font-size:12px; letter-spacing:0.14em; color:var(--amber); margin-bottom:14px; }
+  .section-head h2{ font-size: clamp(28px,3.4vw,40px); font-weight:400; font-style:italic; }
+
+  .pkg-grid{ display:flex; flex-direction:column; }
+  .pkg{
+    display:grid; grid-template-columns: 1fr 1.35fr; gap:48px;
+    padding: 52px 0; border-bottom:1px solid var(--line);
+    scroll-margin-top: 90px;
+  }
+  .pkg:last-child{ border-bottom:none; }
+  .pkg-left{ position:relative; }
+  .pkg-num{ font-family:'Courier New', monospace; font-size:12.5px; letter-spacing:0.14em; color:var(--tier,var(--teal)); margin-bottom:16px; display:block; }
+  .tier{
+    display:inline-block; font-family: Helvetica, Arial, sans-serif; font-size:11px; letter-spacing:0.08em;
+    color:var(--bg-deep); background:var(--tier,var(--teal)); padding:4px 11px; border-radius:3px;
+    margin-bottom:18px; font-weight:700;
+  }
+  .pkg-title{ font-size:clamp(24px,2.8vw,32px); font-style:italic; font-weight:400; margin-bottom:12px; line-height:1.15; }
+  .pkg-cat{ font-family: Helvetica, Arial, sans-serif; font-size:14px; color:var(--ivory-dim); max-width:36ch; margin-bottom:20px; }
+  .pkg-meta{ font-family: Helvetica, Arial, sans-serif; font-size:12.5px; color:var(--gold); display:flex; flex-direction:column; gap:5px; margin-bottom:20px; }
+
+  .price-box{
+    display:inline-flex; align-items:baseline; gap:8px;
+    padding:10px 16px; margin-bottom:22px;
+    border:1px dashed var(--line); border-radius:6px;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .price-box .label{ font-size:10.5px; letter-spacing:0.08em; color:var(--ivory-dim); text-transform:uppercase; }
+  .price-box .amount{ font-size:15px; color:var(--tier,var(--teal)); font-weight:700; }
+
+  .pkg-cta{ font-family: Helvetica, Arial, sans-serif; font-size:12.5px; font-weight:600; color:var(--tier,var(--teal)); text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+  .pkg-cta:hover{ color:var(--amber); }
+  .block{ margin-bottom:24px; } .block:last-child{ margin-bottom:0; }
+  .block h4{ font-family: Helvetica, Arial, sans-serif; font-size:11px; letter-spacing:0.1em; color:var(--tier,var(--teal)); font-weight:600; margin-bottom:12px; padding-bottom:7px; border-bottom:1px solid var(--line); }
+  .crew-list{ list-style:none; font-family: Helvetica, Arial, sans-serif; font-size:13.5px; display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; }
+  .crew-list li{ padding-left:14px; position:relative; color:var(--ivory-dim); }
+  .crew-list li::before{ content:"—"; position:absolute; left:0; color:var(--amber); }
+  .crew-group{ margin-bottom:14px; }
+  .crew-group:last-child{ margin-bottom:0; }
+  .crew-group .grp-label{ font-family: Helvetica, Arial, sans-serif; font-size:11.5px; color:var(--ivory); font-weight:600; margin-bottom:8px; opacity:0.85; }
+  .deliver-list{ list-style:none; font-family: Helvetica, Arial, sans-serif; font-size:13.5px; }
+  .deliver-list li{ padding:8px 0 8px 22px; position:relative; border-bottom:1px dashed rgba(255,255,255,0.06); color:var(--ivory-dim); }
+  .deliver-list li:last-child{ border-bottom:none; }
+  .deliver-list li::before{ content:"◆"; position:absolute; left:0; top:9px; font-size:8px; color:var(--tier,var(--teal)); }
+  .deliver-list li b{ color:var(--ivory); font-weight:400; }
+  .highlight-tags{ display:flex; flex-wrap:wrap; gap:8px; font-family: Helvetica, Arial, sans-serif; }
+  .highlight-tags span{
+    font-size:11.5px; color:var(--ivory-dim); border:1px solid var(--line); border-radius:20px;
+    padding:5px 12px;
+  }
+  .p1{ --tier:#3E9188; } .p2{ --tier:#6FAF9E; } .p3{ --tier:#D8B15C; } .p4{ --tier:#E28A46; }
+  .p5{ --tier:#7FB0A8; } .p6{ --tier:#C97A57; }
+
+  /* ===== CONTACT STRIP ===== */
+  .contact{
+    margin: 60px 8vw 0; padding: 60px 6vw;
+    background: linear-gradient(135deg, rgba(62,145,136,0.12), rgba(226,138,70,0.08));
+    border:1px solid var(--line); border-radius:8px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:26px;
+  }
+  .contact h3{ font-size:clamp(24px,3vw,32px); font-style:italic; font-weight:400; max-width:18ch; }
+  .contact-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .contact-ctas .btn{ padding:15px 28px; font-size:14px; }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding: 50px 8vw 40px; margin-top:60px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-family: Helvetica, Arial, sans-serif; font-size:12.5px; color:var(--ivory-dim);
+  }
+  footer strong{ color:var(--amber); }
+  footer .socials{ display:flex; gap:18px; }
+  footer .socials a{ text-decoration:none; color:var(--ivory-dim); }
+  footer .socials a:hover{ color:var(--amber); }
+
+  /* ===== FLOATING WHATSAPP ===== */
+  .float-wa{
+    position:fixed; bottom:26px; right:26px; z-index:100;
+    display:flex; align-items:center; gap:10px;
+    background:#25D366; color:#06210F; text-decoration:none;
+    padding:14px 20px; border-radius:50px; font-family: Helvetica, Arial, sans-serif;
+    font-size:13.5px; font-weight:700; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    transition: transform .2s ease;
+  }
+  .float-wa:hover{ transform: translateY(-2px) scale(1.02); }
+  .float-wa svg{ width:20px; height:20px; flex-shrink:0; }
+
+  @media (max-width: 760px){
+    .pkg{ grid-template-columns:1fr; gap:24px; padding:38px 0; }
+    .crew-list{ grid-template-columns:1fr; }
+    .nav-links{ display:none; }
+    .contact{ flex-direction:column; align-items:flex-start; padding:40px 6vw; }
+    .float-wa span{ display:none; }
+    .float-wa{ padding:14px; border-radius:50%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">BLUSHING <span>BRIDE</span></div>
+  <div class="nav-links">
+    <a href="#packages">Packages</a>
+    <a href="https://www.instagram.com/blushingbridebd" target="_blank" rel="noopener">Instagram</a>
+    <a class="btn btn-wa" href="https://wa.me/8801719159258?text=Hi%20Blushing%20Bride%2C%20I%27d%20love%20to%20know%20more%20about%20your%20wedding%20packages" target="_blank" rel="noopener">Chat on WhatsApp</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">WEDDING PHOTOGRAPHY &amp; CINEMATOGRAPHY</div>
+  <h1>Six ways to hold onto <em>one</em> day, forever.</h1>
+  <p class="lede">From an intimate signature story to a full multi-event wedding — every package is built crew-up, so what you receive matches the size of the celebration you're having.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-wa" href="https://wa.me/8801719159258?text=Hi%20Blushing%20Bride%2C%20I%27d%20love%20to%20know%20more%20about%20your%20wedding%20packages" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="#06210F" width="16" height="16"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9z"/></svg>
+      Message us on WhatsApp
+    </a>
+    <a class="btn btn-outline" href="#packages">View Packages</a>
+  </div>
+</div>
+
+<section class="packages" id="packages">
+  <div class="section-head">
+    <div class="kicker">OUR PACKAGES</div>
+    <h2>Pick the story that fits your day</h2>
+  </div>
+
+  <div class="pkg-grid">
+
+    <!-- PACKAGE 1 -->
+    <div class="pkg p1" id="pkg1">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 01</span>
+        <span class="tier">ESSENTIAL LUXURY</span>
+        <div class="pkg-title">The Signature Story</div>
+        <p class="pkg-cat">Luxury coverage for intimate celebrations — the whole day, told with care.</p>
+        <div class="pkg-meta">
+          <span>Duration — 5 hours / event</span>
+          <span>Delivery — 15 days, via Drive</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Signature%20Story%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <ul class="crew-list">
+            <li>1 Senior Photographer</li>
+            <li>1 Traditional Photographer</li>
+            <li>1 Senior Cinematographer</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li>Full album, <b>color-graded</b>, high-resolution edits</li>
+            <li><b>2–3 min</b> 4K cinematic trailer</li>
+            <li><b>10–20 min</b> 4K full-length cinematic film</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 2 -->
+    <div class="pkg p2" id="pkg2">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 02</span>
+        <span class="tier">MODERN EDITORIAL</span>
+        <div class="pkg-title">The Editorial Heirloom</div>
+        <p class="pkg-cat">Editorial aesthetics paired with same-day social coverage — timeless and instant.</p>
+        <div class="pkg-meta">
+          <span>Duration — 5 hours / event</span>
+          <span>Delivery — 15 days, via Drive</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Editorial%20Heirloom%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <ul class="crew-list">
+            <li>2 Senior Photographers</li>
+            <li>1 Senior Cinematographer</li>
+            <li>1 Traditional Cinematographer</li>
+            <li>1 Mobile Content Creator</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li>Full album, color-graded, premium <b>12×24" album</b></li>
+            <li><b>100</b> specially edited hero photos</li>
+            <li><b>10–20 min</b> full-length film + <b>2–3 min</b> trailer</li>
+            <li>1 vertical reel, <b>24–48 hrs</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 3 -->
+    <div class="pkg p3" id="pkg3">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 03</span>
+        <span class="tier">ULTRA LUXURY</span>
+        <div class="pkg-title">The Royal Legacy</div>
+        <p class="pkg-cat">Full-scale documentation for the grandest celebrations, shot to be handed down.</p>
+        <div class="pkg-meta">
+          <span>Delivery — 30 days, via Drive</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Royal%20Legacy%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <ul class="crew-list">
+            <li>1 Chief Photographer</li>
+            <li>1 Senior Photographer</li>
+            <li>1 Traditional Photographer</li>
+            <li>1 Senior Cinematographer</li>
+            <li>1 Traditional Cinematographer</li>
+            <li>1 Mobile Content Creator</li>
+            <li>1 Drone Specialist</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li><b>1,000</b> master edited photos + full album</li>
+            <li><b>6–8 min</b> feature + 4K aerial drone footage</li>
+            <li><b>4</b> same-week social reels</li>
+            <li><b>20–30 min</b> 4K full-length film</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 4 -->
+    <div class="pkg p4" id="pkg4">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 04</span>
+        <span class="tier">PRE-WEDDING</span>
+        <div class="pkg-title">The Luxury Pre-Wedding</div>
+        <p class="pkg-cat">A cinematic prelude, before the wedding day even begins.</p>
+        <div class="pkg-meta">
+          <span>Photos in 7 days · Videos in 24–48 hrs</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Luxury%20Pre-Wedding%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <ul class="crew-list">
+            <li>1 Senior Photographer</li>
+            <li>1 Senior Cinematographer</li>
+            <li>1 Drone Specialist</li>
+            <li>1 Mobile Content Creator</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li><b>300</b> master edited photos</li>
+            <li><b>2–3 min</b> cinematic trailer</li>
+            <li><b>2–3</b> short-form videos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 5 -->
+    <div class="pkg p5" id="pkg5">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 05</span>
+        <span class="tier">FULL MUSLIM WEDDING</span>
+        <div class="pkg-title">The Grand Royal Nikah</div>
+        <p class="pkg-cat">Complete 360° coverage across all three events — Gaye Holud, Nikah, and Reception.</p>
+        <div class="pkg-meta">
+          <span>Delivery — 30 days, via Drive</span>
+          <span>Bonus — 1 free pre-wedding shoot, as per client's wish</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Grand%20Royal%20Nikah%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <div class="crew-group">
+            <div class="grp-label">Event 1 — Gaye Holud</div>
+            <ul class="crew-list">
+              <li>1 Senior Photographer</li>
+              <li>1 Traditional Photographer</li>
+              <li>1 Senior Cinematographer</li>
+            </ul>
+          </div>
+          <div class="crew-group">
+            <div class="grp-label">Events 2 &amp; 3 — Nikah &amp; Reception</div>
+            <ul class="crew-list">
+              <li>1 Chief Photographer</li>
+              <li>1 Senior Photographer</li>
+              <li>1 Traditional Photographer</li>
+              <li>2 Senior Cinematographers</li>
+              <li>1 Mobile Content Creator</li>
+            </ul>
+          </div>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li><b>1,200+</b> master edited highlight images + full album</li>
+            <li><b>3</b> full-length 4K cinematic videos (one per event)</li>
+            <li><b>3</b> 4K cinematic trailers</li>
+            <li><b>3</b> social media reels, <b>24–48 hrs</b></li>
+            <li>1 luxury photo album</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>KEY CULTURAL HIGHLIGHTS</h4>
+          <div class="highlight-tags">
+            <span>Nikah document signing</span><span>Kabinnama moment</span><span>Bride preparation</span><span>Groom entry</span><span>Vidai</span><span>Celebrations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 6 -->
+    <div class="pkg p6" id="pkg6">
+      <div class="pkg-left">
+        <span class="pkg-num">PACKAGE 06</span>
+        <span class="tier">FULL HINDU WEDDING</span>
+        <div class="pkg-title">The Somotom Legacy</div>
+        <p class="pkg-cat">Complete 360° coverage across all three events — Gaye Holud, Wedding Day, and Reception.</p>
+        <div class="pkg-meta">
+          <span>Delivery — 45 days, via Drive</span>
+        </div>
+        <div class="price-box"><span class="label">Starting from</span><span class="amount">৳ —</span></div><br>
+        <a class="pkg-cta" href="https://wa.me/8801719159258?text=Hi!%20I%27m%20interested%20in%20the%20Somotom%20Legacy%20package." target="_blank" rel="noopener">Ask about this package →</a>
+      </div>
+      <div class="pkg-right">
+        <div class="block">
+          <h4>ON-SITE CREW</h4>
+          <div class="crew-group">
+            <div class="grp-label">Event 1 — Gaye Holud / Adhibash</div>
+            <ul class="crew-list">
+              <li>1 Senior Photographer</li>
+              <li>1 Traditional Photographer</li>
+              <li>1 Senior Cinematographer</li>
+            </ul>
+          </div>
+          <div class="crew-group">
+            <div class="grp-label">Wedding Day</div>
+            <ul class="crew-list">
+              <li>1 Chief Photographer</li>
+              <li>1 Senior Photographer (portrait specialist)</li>
+              <li>1 Senior Cinematographer (portrait specialist)</li>
+              <li>1 Dedicated Ritual &amp; Detail Specialist</li>
+              <li>1 Mobile Content Creator</li>
+            </ul>
+          </div>
+        </div>
+        <div class="block">
+          <h4>WHAT YOU RECEIVE</h4>
+          <ul class="deliver-list">
+            <li><b>1,500+</b> master color-graded, high-resolution images + full album</li>
+            <li><b>3</b> full-length 4K cinematic videos (one per event)</li>
+            <li><b>3</b> 4K cinematic trailers</li>
+            <li><b>3</b> vertical reels for social</li>
+            <li>1 premium album</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>KEY CULTURAL HIGHLIGHTS</h4>
+          <div class="highlight-tags">
+            <span>Gaye Holud</span><span>Bou Johri</span><span>Shuvo Drishti</span><span>Saat Paak</span><span>Kanya Daan</span><span>Sampradan</span><span>Sindoor Daan</span><span>Reception</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="contact">
+  <h3>Ready to talk about your day?</h3>
+  <div class="contact-ctas">
+    <a class="btn btn-wa" href="https://wa.me/8801719159258?text=Hi%20Blushing%20Bride%2C%20I%27d%20love%20to%20know%20more%20about%20your%20wedding%20packages" target="_blank" rel="noopener">Message on WhatsApp</a>
+    <a class="btn btn-outline" href="https://www.instagram.com/blushingbridebd" target="_blank" rel="noopener">See our work on Instagram</a>
+  </div>
+</div>
+
+<footer>
+  <span><strong>Blushing Bride</strong> — Wedding Photography &amp; Cinematography</span>
+  <div class="socials">
+    <a href="https://wa.me/8801719159258" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://www.instagram.com/blushingbridebd" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/8801719159258?text=Hi%20Blushing%20Bride%2C%20I%27d%20love%20to%20know%20more%20about%20your%20wedding%20packages" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="#06210F"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.3-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.2 1 1-3.1-.2-.3C3.5 15 3 13.5 3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+</body>
+</html>
